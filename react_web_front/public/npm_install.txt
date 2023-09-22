@@ -1,3 +1,6 @@
 npm install react-router-dom
 npm install sweetalert2
 npm install axios
+//썸머노트
+npm install react-quill
+npm install quill-image-resize-module-reat

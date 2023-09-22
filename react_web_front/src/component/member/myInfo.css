@@ -1,0 +1,39 @@
+/*
+메인 색상
+FFF5E4 rgb(255, 245, 228)
+FFE3E1 rgb(255, 227, 225)
+FFD1D1 rgb(255, 209, 209)
+FF9494 rgb(255, 148, 148)
+*/
+
+.my-info-tbl {
+  width: 100%;
+  border-spacing: 0;
+  border-top: 2px solid #ff9494;
+  border-bottom: 2px solid #ff9494;
+  padding: 10px;
+}
+
+.my-info-tbl > tbody > tr > td:first-child {
+  width: 30%;
+}
+.my-info-tbl > tbody > tr > td {
+  padding: 20px 10px;
+}
+#member-phone {
+  padding: 0;
+}
+#member-phone > div {
+  display: flex;
+  justify-content: space-between;
+}
+#member-phone > div > input {
+  width: 60%;
+}
+#member-phone > div > button {
+  width: 30%;
+}
+
+.delete-btn-box {
+  margin-top: 50px;
+}

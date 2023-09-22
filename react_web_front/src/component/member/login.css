@@ -1,0 +1,46 @@
+/*
+메인 색상
+FFF5E4 rgb(255, 245, 228)
+FFE3E1 rgb(255, 227, 225)
+FFD1D1 rgb(255, 209, 209)
+FF9494 rgb(255, 148, 148)
+*/
+
+.login-wrap {
+  width: 400px;
+  margin: 0 auto;
+}
+.login-title {
+  text-align: center;
+  color: #ff9494;
+  font-family: ns-black;
+  font-size: 30px;
+  padding: 50px;
+}
+.input-wrap > label {
+  display: block;
+  padding: 10px 0px;
+  color: #ff9494;
+  font-family: ns-b;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  margin: 10px 0px;
+}
+.search-box > a {
+  font-size: 0.9em;
+  height: 20px;
+  line-height: 20px;
+}
+.search-box > a:hover {
+  text-decoration: underline;
+}
+.search-box > span {
+  font-size: 22px;
+  transform: rotate(90deg);
+}
+.login-btn-box {
+  margin: 20px 0px;
+}

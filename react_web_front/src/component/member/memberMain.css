@@ -1,0 +1,63 @@
+/*
+메인 색상
+FFF5E4 rgb(255, 245, 228)
+FFE3E1 rgb(255, 227, 225)
+FFD1D1 rgb(255, 209, 209)
+FF9494 rgb(255, 148, 148)
+*/
+.mypage-wrap {
+  width: 1200px;
+  margin: 30px auto;
+}
+.my-title {
+  color: rgb(255, 209, 209);
+  font-size: 24px;
+  font-family: ns-b;
+  padding: 10px 0px;
+  border-bottom: 2px solid rgb(255, 209, 209);
+}
+.my-side {
+  width: 200px;
+}
+.my-side > ul {
+  list-style-type: none;
+  box-sizing: border-box;
+  padding-top: 30px;
+  margin: 0;
+}
+.my-side > ul > li > a {
+  display: block;
+  padding: 10px;
+  color: rgb(235, 180, 190);
+  font-family: ns-b;
+  position: relative;
+}
+.my-side > ul > li > a > span {
+  position: absolute;
+  right: 0;
+}
+.my-side > ul > li > a.active-side {
+  background-color: rgb(255, 209, 209);
+  color: #fff;
+}
+.my-side > ul > li > a.active-side > span {
+  color: azure;
+}
+
+.my-content {
+  display: flex;
+  justify-content: space-evenly;
+}
+.current-content {
+  width: 900px;
+}
+.my-content-wrap {
+  width: 700px;
+  margin: 0 auto;
+}
+.my-content-title {
+  padding: 30px 0px;
+  color: #ff9494;
+  font-family: ns-b;
+  font-size: 20px;
+}

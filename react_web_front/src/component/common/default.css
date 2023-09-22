@@ -1,0 +1,109 @@
+/*
+메인 색상
+FFF5E4 rgb(255, 245, 228)
+FFE3E1 rgb(255, 227, 225)
+FFD1D1 rgb(255, 209, 209)
+FF9494 rgb(255, 148, 148)
+*/
+
+@font-face {
+  font-family: ns-l;
+  src: url(/public/font/NotoSansKR-Light.ttf);
+}
+@font-face {
+  font-family: ns-r;
+  src: url(/public/font/NotoSansKR-Regular.ttf);
+}
+@font-face {
+  font-family: ns-b;
+  src: url(/public/font/NotoSansKR-Bold.ttf);
+}
+@font-face {
+  font-family: ns-eb;
+  src: url(/public/font/NotoSansKR-ExtraBold.ttf);
+}
+@font-face {
+  font-family: ns-black;
+  src: url(/public/font/NotoSansKR-Black.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: ns-rr;
+  color: #1e1e1e;
+}
+a {
+  text-decoration: none;
+}
+header {
+  border-bottom: 1px solid #ff9494;
+  padding: 10px 0px;
+}
+.header {
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav > ul {
+  list-style-type: none;
+  display: flex;
+  width: 600px;
+}
+.nav > ul > li {
+  width: calc(100% / 4);
+  text-align: center;
+  padding: 5px 0px;
+}
+.nav > ul > li > a {
+  color: #ff9494;
+  font-family: ns-eb;
+}
+.main-logo > a {
+  font-size: 32px;
+  font-family: ns-black;
+  color: #ff9494;
+}
+.header-link {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+.header-link > a {
+  margin-left: 30px;
+}
+.header-link > a > span {
+  font-size: 30px;
+  color: #ff9494;
+}
+
+.footer {
+  padding: 50px;
+  background-color: #eee;
+}
+.footer-content {
+  width: 1200px;
+  margin: 0 auto;
+}
+.footer-content * {
+  font-size: 14px;
+}
+.footer-content > ul {
+  list-style-type: none;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.footer-content > ul > li {
+  float: left;
+  padding-right: 20px;
+}
+.wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.content {
+  flex: 1;
+}

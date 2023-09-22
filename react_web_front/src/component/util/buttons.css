@@ -1,0 +1,27 @@
+/*
+메인 색상
+FFF5E4 rgb(255, 245, 228)
+FFE3E1 rgb(255, 227, 225)
+FFD1D1 rgb(255, 209, 209)
+FF9494 rgb(255, 148, 148)
+*/
+.btn {
+  width: 100%;
+  padding: 0.7rem;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: ns-eb;
+  outline: none;
+  border: none;
+  color: #fff;
+}
+.st1 {
+  background-color: rgb(255, 180, 200);
+}
+.st2 {
+  background-color: #ff9494;
+}
+
+.st3 {
+  background-color: #ffd1d1;
+}

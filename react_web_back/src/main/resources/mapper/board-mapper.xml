@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.or.iei.board.model.dao.BoardDao">
+	<select id="totalCount" resultType="int">
+		select count(*) from board where board_status=1
+	</select>
+	
+	<select id="selectBoardList" resultType="board">
+		SELECT * FROM
+			(SELECT ROWNUM AS RNUM, B.* FROM
+			(SELECT 
+			    BOARD_NO, 
+			    BOARD_TITLE,
+			    BOARD_IMG,
+			    BOARD_WRITER,
+			    MEMBER_ID,
+			    TO_CHAR(BOARD_DATE, 'YYYY-MM-DD') AS BOARD_DATE
+			FROM BOARD
+			JOIN MEMBER_TBL ON (BOARD_WRITER = MEMBER_NO)
+			WHERE BOARD_STATUS =1
+			ORDER BY 1 DESC)B)
+			WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
+	<!--
+	서브쿼리 방식 
+	<insert id="insertBoard">
+		insert into board value(board_seq.nextval,#{boardTitle},#{boardImg},#{boardDetail},
+		(select member_no from member_tbl where member_id = #{memberId})
+		,1,sysdate)
+	</insert>
+	 -->
+	 <insert id="insertBoard">
+		insert into board values
+				(board_seq.nextval,#{boardTitle},#{boardImg},
+					#{boardDetail},#{boardWriter},1,sysdate)
+	<selectKey resultType="int" keyProperty="boardNo" order="AFTER">
+		select max(board_no) from board
+	</selectKey>
+	</insert>
+	
+	<insert id="insertBoardFile">
+		insert into board_file values (board_file_seq.nextval,#{boardNo},#{filename},#{filepath})
+	</insert>
+	
+	
+	<select id="selectOneBoard" resultMap="getBoard">
+		select
+			board_no,
+			board_title,
+			board_img,
+			board_writer,
+			member_id,
+			board_detail,
+			board_status,
+			to_char(board_date,'yyyy-mm-dd') as board_date
+		from board
+		join member_tbl on (board_writer = member_no)
+		where board_no = #{boardNo}
+	</select>
+	
+	<select id="selectBoardFile" resultType="boardFile" >
+		select * from board_file where board_no = #{boardNo}
+	</select>
+	
+	<resultMap type="board" id="getBoard">
+		<result column="board_no" property="boardNo"/>
+		<result column="board_title" property="boardTitle"/>
+		<result column="board_img" property="boardImg"/>
+		<result column="board_writer" property="boardWriter"/>
+		<result column="member_id" property="memberId"/>
+		<result column="board_detail" property="boardDetail"/>
+		<result column="board_status" property="boardStatus"/>
+		<result column="board_date" property="boardDate"/>
+		<collection 
+			property="fileList" 
+			select="selectBoardFile"
+			column="board_no"
+			javaType="java.util.List"
+			ofType="boardFile"
+		/>
+	</resultMap>
+	
+	<select id="getBoardFile" resultType="boardFile">
+		select * from board_file where board_file_no=#{boardFileNo}
+	</select>
+	
+	
+	
+	
+	
+	
+</mapper>
