@@ -1,23 +1,67 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Button2, Button3 } from "../util/Buttons";
+import Swal from "sweetalert2";
 
 const BoardView = (props) => {
   const isLogin = props.isLogin;
   const location = useLocation();
   const boardNo = location.state.boardNo;
   const [board, setBoard] = useState({});
+  const [member, setMember] = useState(null);
+  const navigate = useNavigate();
   useEffect(() => {
     axios
       .get("/board/view/" + boardNo)
       .then((res) => {
-        console.log(res.data);
         setBoard(res.data);
       })
       .catch((res) => {
         console.log(res.response.status);
       });
+    if (isLogin) {
+      const token = window.localStorage.getItem("token");
+      axios
+        .post("/member/getMember", null, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          setMember(res.data);
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    }
   }, []);
+  const modify = () => {
+    navigate("/board/modify", { state: { board: board } });
+  };
+  const deleteBoard = () => {
+    Swal.fire({
+      icon: "warning",
+      text: "게시글을 삭제하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "삭제",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axios
+          .get("/board/delete/" + board.boardNo)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data === 1) {
+              navigate("/board");
+            }
+          })
+          .catch((res) => {
+            console.log(res.response.status);
+          });
+      }
+    });
+  };
   return (
     <div className="board-view-wrap">
       <div className="board-view-title">{board.boardTitle}</div>
@@ -44,6 +88,20 @@ const BoardView = (props) => {
         className="board-view-detail"
         dangerouslySetInnerHTML={{ __html: board.boardDetail }}
       ></div>
+      <div className="board-view-btn-zone">
+        {isLogin ? (
+          member && member.memberNo === board.boardWriter ? (
+            <>
+              <Button3 text="수정" clickEvent={modify} />
+              <Button3 text="삭제" clickEvent={deleteBoard} />
+            </>
+          ) : (
+            ""
+          )
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 };

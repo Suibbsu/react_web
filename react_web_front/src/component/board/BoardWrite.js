@@ -11,7 +11,7 @@ const BoardWrite = () => {
   const [boardDetail, setBoardDetail] = useState("");
   const [boardFile, setBoardFile] = useState([]);
   //boardImg -> 썸네일 미리보기용, fileList -> 첨부파일 목록 출력용
-  const [boardImg, setBoardImg] = useState("");
+  const [boardImg, setBoardImg] = useState(null);
   const [fileList, setFileList] = useState([]);
   const navigate = useNavigate();
   //글쓰기 버튼 클릭시 동작할 함수(서버에 insert요청 함수)

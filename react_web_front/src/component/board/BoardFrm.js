@@ -18,6 +18,8 @@ const BoardFrm = (props) => {
   const setFileList = props.setFileList;
   const buttonEvent = props.buttonEvent;
   const type = props.type;
+  const delFileNo = props.delFileNo;
+  const setDelFileNo = props.setDelFileNo;
   //새첨부파일 출력용 state
   const [newFileList, setNewFileList] = useState([]);
   const thumbnailChange = (e) => {
@@ -32,7 +34,7 @@ const BoardFrm = (props) => {
       };
     } else {
       setThumbnail({});
-      setBoardImg("");
+      setBoardImg(null);
     }
   };
   const changeFile = (e) => {
@@ -40,7 +42,7 @@ const BoardFrm = (props) => {
     setBoardFile(files);
     const arr = new Array();
     for (let i = 0; i < files.length; i++) {
-      arr.push(files[0].name);
+      arr.push(files[i].name);
     }
     setNewFileList(arr);
   };
@@ -48,7 +50,7 @@ const BoardFrm = (props) => {
     <div className="board-frm-wrap">
       <div className="board-frm-top">
         <div className="board-thumbnail">
-          {boardImg === "" ? (
+          {boardImg === null ? (
             <img src="/Image/default.png" />
           ) : (
             <img src={boardImg} />
@@ -95,6 +97,20 @@ const BoardFrm = (props) => {
                 <td>첨부파일 목록</td>
                 <td>
                   <div className="file-zone">
+                    {type === "modify"
+                      ? fileList.map((item, index) => {
+                          return (
+                            <FileItem
+                              key={("f", index)}
+                              item={item}
+                              delFileNo={delFileNo}
+                              setDelFileNo={setDelFileNo}
+                              fileList={fileList}
+                              setFileList={setFileList}
+                            />
+                          );
+                        })
+                      : ""}
                     {newFileList.map((item, index) => {
                       return (
                         <p key={"newFile" + index}>
@@ -117,9 +133,37 @@ const BoardFrm = (props) => {
         />
       </div>
       <div className="board-btn-box">
-        <Button1 text="작성하기" clickEvent={buttonEvent} />
+        {type === "modify" ? (
+          <Button1 text="수정하기" clickEvent={buttonEvent} />
+        ) : (
+          <Button1 text="작성하기" clickEvent={buttonEvent} />
+        )}
       </div>
     </div>
+  );
+};
+
+const FileItem = (props) => {
+  const item = props.item;
+  const delFileNo = props.delFileNo;
+  const setDelFileNo = props.setDelFileNo;
+  const fileList = props.fileList;
+  const setFileList = props.setFileList;
+  const deleteFile = () => {
+    delFileNo.push(item.boardFileNo);
+    setDelFileNo([...delFileNo]);
+    const newArr = fileList.filter((file) => {
+      return item.boardFileNo !== file.boardFileNo;
+    });
+    setFileList(newArr);
+  };
+  return (
+    <p>
+      <span className="filename">{item.filename}</span>
+      <span className="material-icons del-file-icon" onClick={deleteFile}>
+        delete_forever
+      </span>
+    </p>
   );
 };
 export default BoardFrm;

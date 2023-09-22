@@ -68,4 +68,38 @@ public class BoardService {
 		// TODO Auto-generated method stub
 		return boardDao.getBoardFile(boardFileNo);
 	}
+	public List<BoardFile> delete(int boardNo) {
+		List<BoardFile> list = boardDao.selectBoardFileList(boardNo);
+		int result = boardDao.deleteBoard(boardNo);
+		if(result > 0){
+			return list;
+		}
+		return null;
+	}
+	
+	@Transactional
+	public List<BoardFile> modify(Board b, ArrayList<BoardFile> fileList) {
+		//1. 삭제한파일이있으면 조회 
+		List<BoardFile> delFileList = new ArrayList<BoardFile>();
+		String [] delFileNo = {};
+		int result = 0;
+		if(!b.getDelFileNo().equals("")) {
+			delFileNo = b.getDelFileNo().split("/");
+			//1. 삭제한파일이있으면 조회 
+			delFileList = boardDao.selectDelBoardFileList(delFileNo);
+			//2. 삭제할파일 삭제
+			result += boardDao.deleteBoardFile(delFileNo);
+		}
+		//3. 추가할파일있으면 추가
+		for(BoardFile bf : fileList) {
+			result += boardDao.insertBoardFile(bf);
+		}
+		//4. board테이블 변경
+		result += boardDao.updateBoard(b);
+		if(result == 1+fileList.size()+delFileNo.length) {
+			return delFileList;
+		}else {
+			return null;
+		}
+	}
 }
