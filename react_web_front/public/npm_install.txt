@@ -4,3 +4,5 @@ npm install axios
 //썸머노트
 npm install react-quill
 npm install quill-image-resize-module-reat
+npm install @mui/material @emotion/react @emotion/styled
+npm install swiper

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -161,6 +162,16 @@ public class BoardController {
 		}else {
 			return 0;
 		}
+	}
+	//관리자페이지
+	@GetMapping(value="/adminList/{reqPage}")
+	public Map adminList(@PathVariable int reqPage) {
+		return boardService.adminList(reqPage);
+	}
+	
+	@PostMapping(value="/changeStatus")
+	public int changeStatus(@RequestBody Board b) {
+		return boardService.changeStatus(b);
 	}
 
 }

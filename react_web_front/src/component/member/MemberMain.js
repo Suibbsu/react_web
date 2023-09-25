@@ -22,7 +22,15 @@ const MemberMain = (props) => {
       })
       .then((res) => {
         setMember(res.data);
-        document.querySelectorAll(".my-side a")[0].click();
+        if (res.data.memberType === 1) {
+          const adminMenu = {
+            url: "/admin",
+            text: "관리자 페이지",
+            active: false,
+          };
+          setMenus([...menus, adminMenu]);
+        }
+        //document.querySelectorAll(".my-side a")[0].click();
       })
       .catch((res) => {
         if (res.response.status === 403) {
@@ -123,4 +131,4 @@ const MySideMenu = (props) => {
     </div>
   );
 };
-export default MemberMain;
+export { MemberMain, MySideMenu };

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button2, Button3 } from "../util/Buttons";
+import { Button1, Button2, Button3 } from "../util/Buttons";
 import Swal from "sweetalert2";
 
 const BoardView = (props) => {
@@ -62,6 +62,23 @@ const BoardView = (props) => {
       }
     });
   };
+  const changeStatus = () => {
+    const obj = { boardNo: board.boardNo, boardStatus: 2 };
+    const token = window.localStorage.getItem("token");
+    axios
+      .post("/board/changeStatus", obj, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        if (res.data === 1) {
+          Swal.fire("게시물이 차단되었습니다.");
+        } else {
+          Swal.fire("변경실패~");
+        }
+      });
+  };
   return (
     <div className="board-view-wrap">
       <div className="board-view-title">{board.boardTitle}</div>
@@ -98,6 +115,11 @@ const BoardView = (props) => {
           ) : (
             ""
           )
+        ) : (
+          ""
+        )}
+        {member && member.memberType === 1 ? (
+          <Button1 text="차단" clickEvent={changeStatus} />
         ) : (
           ""
         )}

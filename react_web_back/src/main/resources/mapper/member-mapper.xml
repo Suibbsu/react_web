@@ -20,4 +20,22 @@
   <update id="changePwMember">
   	update member_tbl set member_pw = #{memberPw} where member_id=#{memberId}
   </update>
+  
+  <select id="totalCount" resultType="int">
+  	select count(*) from member_tbl
+  </select>
+  
+  <select id="memberList" resultType="member">
+  	select * from
+  		(select rownum as rnum, m.*from
+  			(select * from member_tbl order by member_type)m
+  		)
+  	where rnum between #{start} and #{end}
+  </select>
+  
+  <update id="changeType">
+  	update member_tbl set member_type=#{memberType} where member_no=#{memberNo}
+  </update>
+  
+  
 </mapper>

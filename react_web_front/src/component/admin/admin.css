@@ -1,0 +1,61 @@
+/*
+메인 색상
+FFF5E4 rgb(255, 245, 228)
+FFE3E1 rgb(255, 227, 225)
+FFD1D1 rgb(255, 209, 209)
+FF9494 rgb(255, 148, 148)
+*/
+
+.admin-member-tbl-box > table {
+  width: 100%;
+  border-spacing: 0;
+}
+.admin-member-tbl-box > table td {
+  text-align: center;
+  padding: 5px;
+  border: 1px solid #eee;
+}
+.admin-member-tbl-box > table > thead td {
+  background-color: #ff9494;
+}
+.admin-paging-wrap {
+  margin-top: 10px;
+}
+.admin-board-tbl > table {
+  width: 100%;
+  border-spacing: 0;
+}
+.admin-board-tbl td {
+  text-align: center;
+  padding: 10px 5px;
+}
+.admin-board-tbl td.title-td {
+  text-align: left;
+}
+.admin-board-tbl td.title-td > div {
+  width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.admin-board-tbl > table > thead td {
+  border-bottom: 2px solid #ff9494;
+  border-top: 2px solid #ff9494;
+  color: #ff9494;
+  font-family: ns-b;
+}
+.admin-board-tbl > table > tbody td {
+  border-bottom: 1px solid #eee;
+}
+.status-td .PrivateSwitchBase-input + span {
+  background-color: #fff;
+}
+.status-td .PrivateSwitchBase-input:checked + span {
+  background-color: #ff9494;
+}
+
+.status-td
+  .css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase
+  + .MuiSwitch-track {
+  background-color: #ff9494;
+}
